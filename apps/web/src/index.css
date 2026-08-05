@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", sans-serif;
+  overflow-x: clip;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 6%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 84% 48%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 38 96% 52%;
+    --accent-foreground: 0 0% 8%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 0 84% 48%;
+    --radius: 0.25rem;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Barlow Condensed", "Inter", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+  .glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(10px);
+  }
+  .ticker {
+    animation: ticker 26s linear infinite;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker { animation: none; }
+  }
+}
+
+/* Ocultar banner publicitario de la plantilla */
+[class*="template-banner"],
+[id*="template-banner"],
+[data-template-banner],
+div:has(> a[href*="hostinger.com"]) {
+  display: none !important;
+}
+
