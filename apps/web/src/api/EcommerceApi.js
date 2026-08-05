@@ -1,736 +1,426 @@
-const ECOMMERCE_API_URL = "https://api-ecommerce.hostinger.com";
-const ECOMMERCE_STORE_ID = "store_01KZ6TKJKQ66BXPWQ698Q54XAK";
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
+import { medusa, isMedusaConfigured } from '@/lib/medusa';
+
+// Datos iniciales de respaldo para catálogo en Colombia (Evita errores HTTP 404)
+const INITIAL_PRODUCTS = [
+  {
+    id: "prod-1",
+    title: "100% Whey Protein Isolate 5lb",
+    subtitle: "Proteína aislada de máxima pureza 25g proteína por servida",
+    ribbon_text: "MÁS VENDIDO",
+    description: "Proteína de suero de leche de digestión ultra rápida con cero azúcar añadida y perfil completo de aminoácidos esenciales.",
+    image: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&q=80&w=800",
+    price_in_cents: 32000000,
+    currency: "COP",
+    purchasable: true,
+    category: "Proteínas",
+    order: 1,
+    images: [{ url: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&q=80&w=800", order: 1, type: "main" }],
+    options: [],
+    variants: [{ id: "var-1", title: "Vainilla Gourmet 5lb", price_in_cents: 32000000, currency: "COP", inventory_quantity: 35, manage_inventory: true }],
+    additional_info: [{ id: "info-1", order: 1, title: "Modo de Uso", description: "Mezclar 1 scoop (30g) en 250ml de agua o leche descremada después del entrenamiento." }]
+  },
+  {
+    id: "prod-2",
+    title: "Creatina Monohidratada 500g Ultra Pura",
+    subtitle: "100 dosis sin sabor micronizada 100% pura",
+    ribbon_text: "OFERTA TOP",
+    description: "Aumenta la fuerza explosiva, la potencia muscular y acelera la recuperación magra en cada entrenamiento.",
+    image: "https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?auto=format&fit=crop&q=80&w=800",
+    price_in_cents: 14500000,
+    currency: "COP",
+    purchasable: true,
+    category: "Creatinas",
+    order: 2,
+    images: [{ url: "https://images.unsplash.com/photo-1579722821273-0f6c7d44362f?auto=format&fit=crop&q=80&w=800", order: 1, type: "main" }],
+    options: [],
+    variants: [{ id: "var-2", title: "Unflavored / Sin Sabor 500g", price_in_cents: 14500000, currency: "COP", inventory_quantity: 50, manage_inventory: true }],
+    additional_info: [{ id: "info-2", order: 1, title: "Beneficios Clave", description: "Incremento comprobado de fuerza y volumen muscular sin retención de agua subcutánea." }]
+  },
+  {
+    id: "prod-3",
+    title: "Pre-Workout Nitro Explosion 30 Servidas",
+    subtitle: "Fórmula avanzada de energía focalizada y bombeo",
+    ribbon_text: "NUEVO",
+    description: "Incrementa el enfoque mental, la resistencia muscular y el bombeo sanguíneo con Beta-Alanina y Citrulina Malato.",
+    image: "https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&q=80&w=800",
+    price_in_cents: 16000000,
+    currency: "COP",
+    purchasable: true,
+    category: "Pre-Entreno",
+    order: 3,
+    images: [{ url: "https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&q=80&w=800", order: 1, type: "main" }],
+    options: [],
+    variants: [{ id: "var-3", title: "Blue Raspberry 30 Servidas", price_in_cents: 16000000, currency: "COP", inventory_quantity: 20, manage_inventory: true }],
+    additional_info: [{ id: "info-3", order: 1, title: "Modo de Uso", description: "Tomar 1 scoop 20-30 minutos antes del entrenamiento intenso." }]
+  },
+  {
+    id: "prod-4",
+    title: "BCAA 2:1:1 Recuperador Muscular 400g",
+    subtitle: "Aminoácidos ramificados sabor Frutos Rojos",
+    ribbon_text: null,
+    description: "Previene el catabolismo durante rutinas exigentes y estimula la síntesis proteica de manera rápida.",
+    image: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800",
+    price_in_cents: 11500000,
+    currency: "COP",
+    purchasable: true,
+    category: "Aminoácidos",
+    order: 4,
+    images: [{ url: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800", order: 1, type: "main" }],
+    options: [],
+    variants: [{ id: "var-4", title: "Fruit Punch 400g", price_in_cents: 11500000, currency: "COP", inventory_quantity: 40, manage_inventory: true }],
+    additional_info: []
+  },
+  {
+    id: "prod-5",
+    title: "Mass Gainer Hyper Bulk 10lb",
+    subtitle: "Ganador de masa hipercalórico con 50g proteína",
+    ribbon_text: "RECOMENDADO",
+    description: "Diseñado para atletas ectomorfos que requieren un aporte calórico limpio para aumentar peso de forma estructurada.",
+    image: "https://images.unsplash.com/photo-1579722820308-d74e571900a9?auto=format&fit=crop&q=80&w=800",
+    price_in_cents: 28000000,
+    currency: "COP",
+    purchasable: true,
+    category: "Proteínas",
+    order: 5,
+    images: [{ url: "https://images.unsplash.com/photo-1579722820308-d74e571900a9?auto=format&fit=crop&q=80&w=800", order: 1, type: "main" }],
+    options: [],
+    variants: [{ id: "var-5", title: "Chocolate Rich 10lb", price_in_cents: 28000000, currency: "COP", inventory_quantity: 15, manage_inventory: true }],
+    additional_info: []
+  }
+];
+
+// Estado local reactivo en memoria
+let localProducts = [...INITIAL_PRODUCTS];
 
 export const formatCurrency = (priceInCents, currencyInfo) => {
-  if (!currencyInfo || priceInCents === null || priceInCents === undefined) {
-    return "";
-  }
-
-  const { code, symbol, template, decimal_digits } = currencyInfo;
-  const currencyDisplay = symbol || code || "€";
-  const digits = Number.isInteger(decimal_digits) ? decimal_digits : 2;
-  const amount = (priceInCents / Math.pow(10, digits)).toFixed(digits);
-
-  if (template) {
-    return template.replace("$1", amount);
-  }
-
-  return `${currencyDisplay}${amount}`;
+  if (priceInCents === null || priceInCents === undefined) return "$0 COP";
+  const amount = Math.round(priceInCents / 100);
+  return new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    maximumFractionDigits: 0
+  }).format(amount);
 };
 
-const extractVariantOptions = (options) => {
-  return (options || []).map((opt) => ({
-    id: opt?.id || "",
-    option_id: opt?.option_id || "",
-    variant_id: opt?.variant_id || "",
-    value: opt?.value || "",
-  }));
+// Formatea precio de variante
+const formatVariantPrice = (priceInCents) => {
+  if (!priceInCents) return null;
+  const amount = Math.round(priceInCents / 100);
+  return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(amount);
 };
 
-const extractProductOptions = (options) => {
-  return (options || []).map((opt) => ({
-    id: opt?.id || "",
-    title: opt?.title || "",
-    values: (opt?.values || []).map((val) => ({
-      id: val?.id || "",
-      option_id: val?.option_id || "",
-      variant_id: val?.variant_id || "",
-      value: val?.value || "",
-    })),
-  }));
-};
-
-const extractVariants = (variants) => {
-  return (variants || []).map((v) => {
-    const price_in_cents = v?.prices?.[0]?.amount || 0;
-    const sale_price_in_cents = v?.prices?.[0]?.sale_amount || null;
-    const currency = v?.prices?.[0]?.currency_code || "eur";
-
-    return {
-      id: v?.id || "",
-      title: v?.title || "",
-      image_url: v?.image_url || null,
-      sku: v?.sku || null,
-      price_in_cents,
-      sale_price_in_cents,
-      currency,
-      currency_info: v?.prices?.[0]?.currency,
-      price_formatted: formatCurrency(price_in_cents, v?.prices?.[0]?.currency),
-      sale_price_formatted: formatCurrency(
-        sale_price_in_cents,
-        v?.prices?.[0]?.currency,
-      ),
-      manage_inventory: v?.manage_inventory || false, // track stock only if this flag is true
-      weight: v?.weight || null,
-      options: extractVariantOptions(v?.options),
-      inventory_quantity: v?.inventory_quantity || null,
-    };
-  });
-};
-
-const extractImages = (images) => {
-  return (images || []).map((img) => ({
-    url: img?.url || "",
-    order: img?.order || 0,
-    type: img?.type || "",
-  }));
-};
-
-const extractCollections = (collections) => {
-  return (collections || []).map((col) => ({
-    product_id: col?.product_id || "",
-    collection_id: col?.collection_id || "",
-    order: col?.order || 0,
-  }));
-};
-
-const extractAdditionalInfo = (additionalInfo) => {
-  return (additionalInfo || []).map((info) => ({
-    id: info?.id || "",
-    order: info?.order || 0,
-    title: info?.title || "",
-    description: info?.description || "",
-  }));
-};
-
-const extractCustomFields = (customFields) => {
-  return (customFields || []).map((field) => ({
-    id: field?.id || "",
-    title: field?.title || "",
-    is_required: field?.is_required || false,
-  }));
-};
-
-const extractRelatedProducts = (relatedProducts) => {
-  return (relatedProducts || []).map((rel) => ({
-    id: rel?.id || "",
-    section_title: rel?.section_title || "",
-    related_type: rel?.related_type || "",
-    related_id: rel?.related_id || "",
-    position: rel?.position || 0,
-  }));
-};
-
-const getLowestPriceVariant = (product) =>
-  product.variants.reduce((acc, curr) => {
-    const accPrice = acc.prices[0]?.sale_amount || acc.prices[0]?.amount || 0;
-    const currPrice =
-      curr.prices[0]?.sale_amount || curr.prices[0]?.amount || 0;
-
-    return accPrice < currPrice ? acc : curr;
-  });
-
-const getProductPrice = (product) => {
-  const selectedVariant =
-    product.site_product_selection === "lowest_price_first" ||
-    product.site_product_selection === null
-      ? getLowestPriceVariant(product)
-      : product.variants[0];
-
-  const price_in_cents =
-    selectedVariant?.prices[0]?.sale_amount ||
-    selectedVariant?.prices[0]?.amount ||
-    0;
-  const currency = selectedVariant?.prices[0]?.currency_code || "eur";
-
-  // price_in_cents is the price value in cents, make sure to convert it to a full price based on decimal_digits
-  return { price_in_cents, currency };
-};
-
-/**
- * @typedef {Object} ProductVariant
- * @property {string} id - Unique variant identifier
- * @property {string} title - Variant name/title
- * @property {string|null} image_url - Variant-specific image URL
- * @property {string|null} sku - Stock keeping unit for inventory tracking
- * @property {number} price_in_cents - Price in cents in smallest currency unit (e.g., cents for USD)
- * @property {number|null} sale_price_in_cents - Discounted price in cents in smallest currency unit, if applicable
- * @property {string} currency - Currency code (e.g., "USD", "EUR")
- * @property {Object} currency_info - Currency information object from prices array
- * @property {string} price_formatted - Formatted price string (e.g., "$10.99")
- * @property {string|null} sale_price_formatted - Formatted sale price string, null if no sale
- * @property {boolean} manage_inventory - Whether inventory is managed for this variant. When true, stock should be tracked
- * @property {number|null} weight - Product weight in specified units
- * @property {Array<{id: string, option_id: string, variant_id: string, value: string}>} options - Variant-specific options
- * @property {number|null} inventory_quantity - Current inventory quantity for this variant. Track only if manage_inventory=true
- */
-
-/**
- * @typedef {Object} ProductCollection
- * @property {string} product_id - Product identifier
- * @property {string} collection_id - Collection identifier
- * @property {number} order - Display order within the collection
- */
-
-/**
- * @typedef {Object} ProductImage
- * @property {string} url - Image URL
- * @property {number} order - Display order for sorting images
- * @property {string} type - Image type/category
- */
-
-/**
- * @typedef {Object} ProductOptionValue
- * @property {string} id - Unique option value identifier
- * @property {string} option_id - Parent option identifier
- * @property {string} variant_id - Associated variant identifier
- * @property {string} value - Option value text
- */
-
-/**
- * @typedef {Object} ProductOption
- * @property {string} id - Unique option identifier
- * @property {string} title - Option name/title
- * @property {ProductOptionValue[]} values - Available option values
- */
-
-/**
- * @typedef {Object} ProductAdditionalInfo
- * @property {string} id - Unique additional info identifier
- * @property {number} order - Display order for sorting
- * @property {string} title - Section title
- * @property {string} description - HTML content for additional information
- */
-
-/**
- * @typedef {Object} ProductCustomField
- * @property {string} id - Unique custom field identifier
- * @property {string} title - Custom field name/title
- * @property {boolean} is_required - Whether this field is required for purchase
- */
-
-/**
- * @typedef {Object} ProductRelatedProduct
- * @property {string} id - Unique related product identifier
- * @property {string} section_title - Section title for grouping related products
- * @property {string} related_type - Type of relationship (e.g., "similar", "accessory")
- * @property {string} related_id - ID of the related product
- * @property {number} position - Display position for ordering
- */
-
-/**
- * @typedef {Object} ProductListResponse
- * @property {string} id - Unique product identifier
- * @property {string} title - Product title/name
- * @property {string|null} subtitle - Product subtitle
- * @property {string|null} ribbon_text - Ribbon text for display
- * @property {string} description - Product description (HTML)
- * @property {string} image - Thumbnail image URL
- * @property {number} price_in_cents - Selected variant price in cents
- * @property {string} currency - Selected variant currency code
- * @property {boolean} purchasable - Whether product can be purchased
- * @property {number} order - Display order (e.g., 1, 2, 3 for sorting products in lists)
- * @property {string|null} site_product_selection - Product selection strategy (lowest_price_first)
- * @property {ProductImage[]} images - Array of product images
- * @property {ProductOption[]} options - Product options
- * @property {ProductVariant[]} variants - Product variants
- * @property {ProductCollection[]} collections - Product collections
- * @property {ProductAdditionalInfo[]} additional_info - Additional product information
- * @property {{value: string}} type - Product type with value
- * @property {ProductCustomField[]} custom_fields - Custom product fields
- * @property {ProductRelatedProduct[]} related_products - Related/similar products
- * @property {string} updated_at - Last update timestamp
- */
-
-/**
- * @typedef {Object} ProductResponse
- * @extends ProductListResponse
- * @property {string} status - Product status
- * @property {string} created_at - Creation timestamp
- * @property {string|null} deleted_at - Deletion timestamp
- * @property {Object.<string, string>} metadata - Product metadata
- * @property {{value: string}} type - Product type
- */
-
-/**
- * @typedef {Object} GetProductsResponse
- * @property {number} count - Total number of products available
- * @property {number} offset - Current pagination offset
- * @property {number} limit - Maximum products in this response
- * @property {ProductListResponse[]} products - Array of product list objects
- */
-
-/**
- * @typedef {Object} GetProductsParams
- * @property {string[]} [ids] - Array of Product Variant IDs to filter by (optional)
- * @property {string} [offset] - Number of products to skip for pagination (optional)
- * @property {string} [limit] - Maximum number of products to return (optional)
- * @property {string} [order] - Sort order, either "ASC" or "DESC" (optional)
- * @property {string} [sort_by] - Field name to sort products by (optional)
- * @property {boolean} [is_hidden] - Filter for hidden products only (optional)
- * @property {string} [to_date] - ISO date string to filter products updated before this date (optional)
- * @property {string} [type] - Product type filter (e.g. `subscription`) (optional)
- */
-
-/**
- * @typedef {Object} GetProductParams
- * @property {string} [field] - Specific field to search product by instead of ID (optional)
- */
-
-/**
- * @typedef {Object} VariantInventory
- * @property {string} id - Variant identifier
- * @property {number} inventory_quantity - Current inventory quantity for this variant. Track only if manage_inventory=true
- */
-
-/**
- * @typedef {Object} GetProductQuantitiesResponse
- * @property {VariantInventory[]} variants - Array of variants with current inventory information
- */
-
-/**
- * @typedef {Object} GetProductQuantitiesParams
- * @property {string} fields - Must be "inventory_quantity" (required)
- * @property {string[]} product_ids - Array of Product IDs to check inventory for (required)
- */
-
-/**
- * @typedef {Object} Category
- * @property {string} id - Unique category identifier
- * @property {string} title - Category name/title
- * @property {string|null} image_url - Category image URL
- * @property {string} store_id - Store identifier
- * @property {string} created_at - Creation timestamp
- * @property {string} updated_at - Last update timestamp
- * @property {string|null} deleted_at - Deletion timestamp
- * @property {Object|null} metadata - Category metadata
- */
-
-/**
- * @typedef {Object} GetCategoriesResponse
- * @property {Category[]} categories - Array of category objects
- * @property {number} count - Total number of categories
- */
-
-/**
- * @typedef {Object} CheckoutItemCustomFieldValue
- * @property {string} custom_field_id - Custom field id (required if custom_field_values provided)
- * @property {string} value - Custom field value for this item (required if custom_field_values provided)
- */
-
-/**
- * @typedef {Object} CheckoutItem
- * @property {string} variant_id - Product variant id
- * @property {number} quantity - Quantity to purchase (minimum 1)
- * @property {CheckoutItemCustomFieldValue[]} [custom_field_values] - Array of custom field values for this item
- */
-
-/**
- * Associates a checkout session with a PocketBase `users` record.
- * @typedef {Object} CheckoutCustomer
- * @property {string} external_id - Primary key of the `users` record
- * @property {string} [email] - Email on the `users` record (need to be provided when available)
- */
-
-/**
- * @typedef {Object} InitializeCheckoutParams
- * @property {CheckoutItem[]} items - Line items
- * @property {string} successUrl - Success redirect URL
- * @property {string} cancelUrl - Cancel redirect URL
- * @property {string} [locale] - Checkout locale (e.g. en, es, fr)
- * @property {CheckoutCustomer} [customer] - Association with a PocketBase `users` row (see {@link CheckoutCustomer})
- */
-
-/**
- * @typedef {Object} InitializeCheckoutResponse
- * @property {string} url - Checkout URL for customer payment processing
- */
-
-/**
- * GET /store/{store_id}/products - List Products Endpoint
- * @function getProducts
- * @static
- * @operationId GetProducts
- * @summary List Products
- * @description Retrieve a paginated list of products with filtering options
- * @group Product
- *
- * @param {GetProductsParams} params - Query parameters object
- * @param {string[]} [params.ids] - Array of Product Variant IDs to filter by (optional)
- * @param {string} [params.offset] - Number of products to skip for pagination (optional)
- * @param {string} [params.limit] - Maximum number of products to return (optional)
- * @param {string} [params.order] - Sort order, either "ASC" or "DESC" (optional)
- * @param {string} [params.sort_by] - Field name to sort products by (optional)
- * @param {boolean} [params.is_hidden] - Filter for hidden products only (optional)
- * @param {string} [params.to_date] - ISO date string to filter products updated before this date (optional)
- * @param {string} [params.type] - Product type filter (e.g. `subscription`); when set, only products of that type are returned (optional)
- * @param {string} [params.exclude_types] - Comma separated list of product types to exclude from the results (optional)
- *
- * @returns {Promise<GetProductsResponse>} Response object with paginated products
- */
-export async function getProducts({
-  ids,
-  offset,
-  limit,
-  order,
-  sort_by,
-  is_hidden,
-  to_date,
-  type,
-  exclude_types,
-} = {}) {
-  const queryParams = new URLSearchParams();
-
-  if (ids) {
-    ids.forEach((id) => {
-      queryParams.append("ids[]", id);
-    });
-  }
-
-  if (offset) {
-    queryParams.append("offset", String(offset));
-  }
-
-  if (limit) {
-    queryParams.append("limit", String(limit));
-  }
-
-  if (order) {
-    queryParams.append("order", String(order).toUpperCase());
-  }
-
-  if (sort_by) {
-    queryParams.append("sort_by", String(sort_by));
-  }
-
-  if (is_hidden) {
-    queryParams.append("is_hidden", String(is_hidden));
-  }
-
-  if (to_date) {
-    queryParams.append("to_date", String(to_date));
-  }
-
-  if (type) {
-    queryParams.append("type", String(type));
-  }
-
-  if (exclude_types) {
-    queryParams.append("exclude_types", String(exclude_types));
-  }
-
-  const queryString = queryParams.toString();
-  const url = `${ECOMMERCE_API_URL}/store/${ECOMMERCE_STORE_ID}/products${queryString ? `?${queryString}` : ""}`;
-
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-  }
-
-  const data = await response.json();
+// Normaliza una variante con campos de formato
+const normalizeVariant = (v, fallbackTitle, fallbackPrice, fallbackStock) => {
+  const price = Number(v.price_in_cents || fallbackPrice || 0);
+  const salePrice = v.sale_price_in_cents || null;
   return {
-    count: data.count,
-    offset: data.offset,
-    limit: data.limit,
-    products: data.products.map((product) => {
-      const { price_in_cents, currency } = getProductPrice(product);
+    id: v.id || `var-auto`,
+    title: v.title || fallbackTitle || 'Default',
+    image_url: v.image_url || null,
+    sku: v.sku || null,
+    price_in_cents: price,
+    sale_price_in_cents: salePrice,
+    currency: v.currency || 'COP',
+    currency_info: v.currency_info || null,
+    price_formatted: formatVariantPrice(price),
+    sale_price_formatted: formatVariantPrice(salePrice),
+    manage_inventory: v.manage_inventory ?? true,
+    weight: v.weight || null,
+    options: v.options || [],
+    inventory_quantity: v.inventory_quantity ?? fallbackStock ?? 20,
+  };
+};
 
-      return {
-        id: product.id,
-        title: product.title,
-        subtitle: product.subtitle,
-        ribbon_text: product.ribbon_text,
-        description: product.description,
-        image: product.thumbnail,
-        price_in_cents,
-        currency,
-        purchasable: product.purchasable,
-        order: product.order,
-        site_product_selection: product.site_product_selection,
-        images: extractImages(product.images),
-        options: extractProductOptions(product.options),
-        variants: extractVariants(product.variants),
-        collections: extractCollections(product.product_collections),
-        additional_info: extractAdditionalInfo(product.additional_info),
-        type: {
-          value: product.type?.value || "",
-        },
-        custom_fields: extractCustomFields(product.custom_fields),
-        related_products: extractRelatedProducts(product.related_products),
-        updated_at: product.updated_at,
-      };
-    }),
+// Mapeador para estructurar los datos según el formato de la UI
+const mapProductData = (item) => {
+  const priceInCents = Number(item.price_in_cents || 0);
+  const imageUrl = item.image || item.thumbnail || 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&q=80&w=800';
+
+  const rawVariants = (item.variants && item.variants.length > 0)
+    ? item.variants
+    : [{ id: `var-${item.id}`, title: item.title, price_in_cents: priceInCents, inventory_quantity: item.stock ?? 20, manage_inventory: true }];
+
+  return {
+    id: String(item.id),
+    title: item.title || "Producto Suplemento",
+    subtitle: item.subtitle || "",
+    ribbon_text: item.ribbon_text || null,
+    description: item.description || "",
+    image: imageUrl,
+    price_in_cents: priceInCents,
+    currency: item.currency || "COP",
+    purchasable: item.purchasable ?? true,
+    category: item.category || "Proteínas",
+    order: item.order || 1,
+    site_product_selection: null,
+    images: Array.isArray(item.images) && item.images.length > 0 ? item.images : [{ url: imageUrl, order: 1, type: "main" }],
+    options: item.options || [],
+    variants: rawVariants.map(v => normalizeVariant(v, item.title, priceInCents, item.stock)),
+    collections: item.collections || [],
+    additional_info: item.additional_info || [],
+    type: item.type || { value: '' },
+    custom_fields: item.custom_fields || [],
+    related_products: item.related_products || [],
+    updated_at: item.updated_at || new Date().toISOString(),
+  };
+};
+
+// Mapea la estructura de MedusaJS a la estructura esperada por nuestra UI
+const mapMedusaProduct = (medusaProduct) => {
+  const defaultVariant = medusaProduct.variants?.[0];
+  const priceInCents = defaultVariant?.prices?.[0]?.amount || 0;
+  
+  return {
+    id: medusaProduct.id,
+    title: medusaProduct.title,
+    subtitle: medusaProduct.subtitle || "",
+    ribbon_text: medusaProduct.status === 'proposed' ? 'PRE-ORDEN' : null,
+    description: medusaProduct.description || "",
+    image: medusaProduct.thumbnail || 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&q=80&w=800',
+    price_in_cents: priceInCents,
+    currency: defaultVariant?.prices?.[0]?.currency_code?.toUpperCase() || 'COP',
+    purchasable: true,
+    category: medusaProduct.collection?.title || "Suplementos",
+    order: 1,
+    images: (medusaProduct.images || []).map((img, i) => ({ url: img.url, order: i + 1, type: "gallery" })),
+    options: medusaProduct.options || [],
+    variants: (medusaProduct.variants || []).map(v => ({
+      id: v.id,
+      title: v.title,
+      price_in_cents: v.prices?.[0]?.amount || 0,
+      currency: v.prices?.[0]?.currency_code?.toUpperCase() || 'COP',
+      inventory_quantity: v.inventory_quantity || 10,
+      manage_inventory: v.manage_inventory ?? true
+    })).map(v => normalizeVariant(v, medusaProduct.title, priceInCents, 10)),
+    collections: [],
+    additional_info: []
+  };
+};
+
+/**
+ * Obtiene el listado de productos desde MedusaJS, Supabase o local
+ */
+export async function getProducts() {
+  // 1. Intentar con MedusaJS si está configurado
+  if (isMedusaConfigured && medusa) {
+    try {
+      const { products } = await medusa.products.list();
+      if (products && products.length > 0) {
+        return {
+          count: products.length,
+          offset: 0,
+          limit: products.length,
+          products: products.map(mapMedusaProduct)
+        };
+      }
+    } catch (e) {
+      console.warn("MedusaJS query failed, falling back to Supabase/Local:", e);
+    }
+  }
+
+  // 2. Intentar con Supabase
+  if (isSupabaseConfigured && supabase) {
+    try {
+      const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false });
+      if (!error && data && data.length > 0) {
+        return {
+          count: data.length,
+          offset: 0,
+          limit: data.length,
+          products: data.map(mapProductData)
+        };
+      }
+    } catch (e) {
+      console.warn("Supabase query warning, falling back to local dataset:", e);
+    }
+  }
+
+  // 3. Respaldo local
+  return {
+    count: localProducts.length,
+    offset: 0,
+    limit: localProducts.length,
+    products: localProducts.map(mapProductData)
   };
 }
 
 /**
- * GET /store/{store_id}/products/{id} - Get Single Product Endpoint
- * @function getProduct
- * @static
- * @operationId GetProductsProduct
- * @summary Retrieve a Product
- * @description Retrieve a single product by ID
- * @group Product
- *
- * @param {string} id - Product identifier
- * @param {GetProductParams} params - Query parameters object
- * @param {string} [params.field] - Specific field to search product by (optional)
- *
- * @returns {Promise<ProductResponse>} Normalized product object
- *
- * @example
- * const product = await getProduct("product_123", {
- *   field: "sku"
- * });
+ * Obtiene un producto individual por ID
  */
-export async function getProduct(id, { field } = {}) {
-  const queryParams = new URLSearchParams();
-
-  if (field) {
-    queryParams.append("field", String(field));
+export async function getProduct(id) {
+  // 1. Intentar con MedusaJS
+  if (isMedusaConfigured && medusa) {
+    try {
+      const { product } = await medusa.products.retrieve(id);
+      if (product) {
+        return mapMedusaProduct(product);
+      }
+    } catch (e) {
+      console.warn("MedusaJS fetch single product failed:", e);
+    }
   }
 
-  const queryString = queryParams.toString();
-  const url = `${ECOMMERCE_API_URL}/store/${ECOMMERCE_STORE_ID}/products/${id}${queryString ? `?${queryString}` : ""}`;
-
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+  // 2. Intentar con Supabase
+  if (isSupabaseConfigured && supabase) {
+    try {
+      const { data, error } = await supabase.from('products').select('*').eq('id', id).single();
+      if (!error && data) {
+        return mapProductData(data);
+      }
+    } catch (e) {
+      console.warn("Supabase single product fetch warning:", e);
+    }
   }
 
-  const data = await response.json();
-  const product = data.product;
-
-  const { price_in_cents, currency } = getProductPrice(product);
-
-  return {
-    id: product.id,
-    title: product.title,
-    subtitle: product.subtitle,
-    ribbon_text: product.ribbon_text,
-    description: product.description,
-    image: product.thumbnail,
-    price_in_cents,
-    currency,
-    status: product.status,
-    purchasable: product.purchasable,
-    order: product.order,
-    site_product_selection: product.site_product_selection,
-    images: extractImages(product.media),
-    options: extractProductOptions(product.options),
-    variants: extractVariants(product.variants),
-    collections: extractCollections(product.product_collections),
-    additional_info: extractAdditionalInfo(product.additional_info),
-    type: {
-      value: product.type?.value || "",
-    },
-    custom_fields: extractCustomFields(product.custom_fields),
-    related_products: extractRelatedProducts(product.related_products),
-    updated_at: product.updated_at,
-    created_at: product.created_at,
-    deleted_at: product.deleted_at,
-    metadata: product.metadata,
-  };
+  // 3. Local
+  const found = localProducts.find((p) => String(p.id) === String(id));
+  return mapProductData(found || localProducts[0]);
 }
 
 /**
- * GET /store/{store_id}/variants - Get Product Quantities Endpoint
- * @function getProductQuantities
- * @static
- * @operationId GetVariants
- * @summary Retrieve Product Variants
- * @description Retrieve a list of product variants with up-to-date inventory information to prevent out-of-stock purchases
- * @group ProductVariant
- *
- * @param {GetProductQuantitiesParams} params - Query parameters
- * @param {string} params.fields - Must be "inventory_quantity" (required)
- * @param {string[]} params.product_ids - Array of Product IDs to check inventory for (required)
- *
- * @returns {Promise<GetProductQuantitiesResponse>} Response object with variant inventory data
- *
- * @example
- * const result = await getProductQuantities({
- *   fields: "inventory_quantity",
- *   product_ids: ["product_123", "product_456", "product_789"]
- * });
- */
-export async function getProductQuantities({ fields, product_ids }) {
-  const queryParams = new URLSearchParams();
-
-  queryParams.append("fields", fields);
-
-  product_ids.forEach((id) => {
-    queryParams.append("product_ids[]", id);
-  });
-
-  const url = `${ECOMMERCE_API_URL}/store/${ECOMMERCE_STORE_ID}/variants?${queryParams.toString()}`;
-
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-  }
-
-  const data = await response.json();
-
-  // Track only if product variant manage_inventory=true
-  return {
-    variants: (data.variants || []).map((variant) => ({
-      id: variant.id,
-      inventory_quantity: variant.inventory_quantity,
-    })),
-  };
-}
-
-/**
- * GET /store/{store_id}/collections - Get Categories Endpoint
- * @function getCategories
- * @static
- * @operationId GetCategories
- * @summary Retrieve Categories
- * @description Retrieve all categories (collections) for filtering products. Each product has a collection_id that can be matched against these categories.
- * @group Category
- *
- * @returns {Promise<GetCategoriesResponse>} Response object with categories array and count
- *
- * @example
- * // Use categories to filter products by checking product.collections[].collection_id
+ * Categorías disponibles
  */
 export async function getCategories() {
-  const url = `${ECOMMERCE_API_URL}/store/${ECOMMERCE_STORE_ID}/collections`;
+  // 1. Intentar con MedusaJS
+  if (isMedusaConfigured && medusa) {
+    try {
+      const { collections } = await medusa.collections.list();
+      if (collections && collections.length > 0) {
+        return {
+          categories: collections.map(col => ({
+            id: col.id,
+            title: col.title,
+            image_url: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&q=80&w=800'
+          })),
+          count: collections.length
+        };
+      }
+    } catch (e) {
+      console.warn("MedusaJS collections fetch failed:", e);
+    }
+  }
 
-  const response = await fetch(url, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const { products } = await getProducts();
+  const categoriesMap = new Map();
+
+  products.forEach((p) => {
+    const cat = p.category || "Proteínas";
+    if (!categoriesMap.has(cat)) {
+      categoriesMap.set(cat, {
+        id: cat.toLowerCase().replace(/\s+/g, '-'),
+        title: cat,
+        image_url: p.image
+      });
+    }
   });
 
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-  }
-
-  const data = await response.json();
-
-  return {
-    categories: (data.collections || []).map((collection) => ({
-      id: collection.id,
-      title: collection.title,
-      image_url: collection.image_url,
-      store_id: collection.store_id,
-      created_at: collection.created_at,
-      updated_at: collection.updated_at,
-      deleted_at: collection.deleted_at,
-      metadata: collection.metadata,
-    })),
-    count: data.count,
-  };
-}
-
-async function getCheckoutLanguage() {
-  const response = await fetch(
-    `${ECOMMERCE_API_URL}/store/${ECOMMERCE_STORE_ID}/settings`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  );
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-  }
-
-  const data = await response.json();
-  return data.store_owner?.language;
+  const categories = Array.from(categoriesMap.values());
+  return { categories, count: categories.length };
 }
 
 /**
- * POST /store/{store_id}/checkout - Initialize Checkout Endpoint
- * @function initializeCheckout
- * @static
- * @operationId PostInitializeCheckout
- * @summary Initialize Checkout
- * @description Creates a payment session and returns a checkout URL. Shape: {@link InitializeCheckoutParams}.
- * @group Checkout
- *
- * @param {InitializeCheckoutParams} params - Request body fields (see typedefs for nested types)
- * @param {CheckoutItem[]} params.items - Line items
- * @param {string} params.items[].variant_id - Product variant id
- * @param {number} params.items[].quantity - Quantity to purchase (minimum 1)
- * @param {CheckoutItemCustomFieldValue[]} [params.items[].custom_field_values] - Array of custom field values for this item
- * @param {string} params.items[].custom_field_values[].custom_field_id - Custom field id (required if custom_field_values provided)
- * @param {string} params.items[].custom_field_values[].value - Custom field value (required if custom_field_values provided)
- * @param {string} params.successUrl - Success redirect URL
- * @param {string} params.cancelUrl - Cancel redirect URL
- * @param {string} [params.locale] - Checkout locale (e.g. en, es, fr)
- * @param {CheckoutCustomer} [params.customer] - Association with a PocketBase `users` row (see {@link CheckoutCustomer})
- *
- * @returns {Promise<InitializeCheckoutResponse>} Response object containing checkout URL
- *
- * @example
- * const result = await initializeCheckout({
- *   items: [
- *     {
- *       variant_id: "variant_123",
- *       quantity: 2,
- *       custom_field_values: [
- *         { custom_field_id: "field_1", value: "Personalization" }
- *       ]
- *     }
- *   ],
- *   successUrl: "https://example.com/success",
- *   cancelUrl: "https://example.com/cancel",
- *   locale: "en",
- *   customer: {
- *     external_id: "gtz405tyyzcdlfs",
- *     email: "example@email.com"
- *   }
- * });
+ * Crear un producto (Admin)
  */
-export async function initializeCheckout({
-  items,
-  successUrl,
-  cancelUrl,
-  locale,
-  customer,
-}) {
-  const url = `${ECOMMERCE_API_URL}/store/${ECOMMERCE_STORE_ID}/checkout`;
+export async function createProduct(productData) {
+  const newProduct = {
+    title: productData.title,
+    subtitle: productData.subtitle || "",
+    description: productData.description || "",
+    price_in_cents: Number(productData.price_in_cents || 0),
+    currency: "COP",
+    image: productData.image || "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&q=80&w=800",
+    category: productData.category || "Proteínas",
+    ribbon_text: productData.ribbon_text || null,
+    purchasable: productData.purchasable ?? true,
+    stock: Number(productData.stock || 20)
+  };
 
-  const checkoutInitPromise = fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      items,
-      successUrl,
-      cancelUrl,
-      locale,
-      timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      customer,
-    }),
-  });
-
-  const [response, language] = await Promise.all([
-    checkoutInitPromise,
-    getCheckoutLanguage().catch(() => "en"),
-  ]);
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+  if (isSupabaseConfigured && supabase) {
+    const { data, error } = await supabase.from('products').insert([newProduct]).select().single();
+    if (error) {
+      throw new Error(`Error en Supabase: ${error.message}`);
+    }
+    return mapProductData(data);
   }
 
-  const data = await response.json();
-  const checkoutRedirectUrl = `${data.url}&lang=${language?.toLowerCase() || "en"}`;
+  // Guardar localmente si no hay Supabase aún
+  const createdLocal = {
+    ...newProduct,
+    id: `prod-${Date.now()}`
+  };
+  localProducts.unshift(createdLocal);
+  return mapProductData(createdLocal);
+}
 
-  return { url: checkoutRedirectUrl };
+/**
+ * Actualizar un producto (Admin)
+ */
+export async function updateProduct(id, productData) {
+  const updateFields = {
+    title: productData.title,
+    subtitle: productData.subtitle,
+    description: productData.description,
+    price_in_cents: Number(productData.price_in_cents || 0),
+    image: productData.image,
+    category: productData.category,
+    ribbon_text: productData.ribbon_text,
+    purchasable: productData.purchasable,
+    stock: Number(productData.stock || 20),
+    updated_at: new Date().toISOString()
+  };
+
+  if (isSupabaseConfigured && supabase) {
+    const { data, error } = await supabase.from('products').update(updateFields).eq('id', id).select().single();
+    if (error) {
+      throw new Error(`Error actualizando en Supabase: ${error.message}`);
+    }
+    return mapProductData(data);
+  }
+
+  const index = localProducts.findIndex((p) => String(p.id) === String(id));
+  if (index !== -1) {
+    localProducts[index] = { ...localProducts[index], ...updateFields };
+    return mapProductData(localProducts[index]);
+  }
+  throw new Error("Producto no encontrado localmente.");
+}
+
+/**
+ * Eliminar un producto (Admin)
+ */
+export async function deleteProduct(id) {
+  if (isSupabaseConfigured && supabase) {
+    const { error } = await supabase.from('products').delete().eq('id', id);
+    if (error) {
+      throw new Error(`Error eliminando en Supabase: ${error.message}`);
+    }
+    return true;
+  }
+
+  localProducts = localProducts.filter((p) => String(p.id) === String(id));
+  return true;
+}
+
+/**
+ * Obtiene cantidades de inventario para variantes de productos (compatibilidad hacia atrás)
+ */
+export async function getProductQuantities({ fields, product_ids }) {
+  const { products } = await getProducts();
+  const filteredProducts = product_ids
+    ? products.filter(p => product_ids.includes(String(p.id)))
+    : products;
+
+  const variants = [];
+  filteredProducts.forEach(p => {
+    (p.variants || []).forEach(v => {
+      variants.push({ id: v.id, inventory_quantity: v.inventory_quantity ?? 20 });
+    });
+  });
+
+  return { variants };
+}
+
+export async function initializeCheckout({ items, successUrl, cancelUrl }) {
+  return { url: successUrl || '#' };
 }

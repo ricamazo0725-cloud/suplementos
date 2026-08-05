@@ -116,8 +116,9 @@ const Layout = ({ children }) => {
             </ul>
           </div>
         </div>
-        <div className="border-t border-border px-4 py-5 text-center text-xs sm:px-8">
-          © {new Date().getFullYear()} IronFuel Suplementos. Todos los derechos reservados.
+        <div className="border-t border-border px-4 py-5 text-center text-xs sm:px-8 flex items-center justify-center gap-4">
+          <span>© {new Date().getFullYear()} IronFuel Suplementos. Todos los derechos reservados.</span>
+          <Link to="/admin" className="text-muted-foreground/50 hover:text-primary transition">Admin</Link>
         </div>
       </footer>
 
