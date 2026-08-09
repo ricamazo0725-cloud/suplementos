@@ -1,0 +1,54 @@
+import React from 'react';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
+import Layout from './components/Layout';
+import { CartProvider } from './hooks/useCart';
+import { AuthProvider } from './hooks/useAuth';
+import ProtectedRoute from './components/ProtectedRoute';
+import { Toaster } from './components/ui/toaster';
+import HomePage from './pages/HomePage';
+import CatalogPage from './pages/CatalogPage';
+import ProductDetailPage from './pages/ProductDetailPage';
+import CheckoutPage from './pages/CheckoutPage';
+import OrderSuccessPage from './pages/OrderSuccessPage';
+import AdminLoginPage from './pages/AdminLoginPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
+import AdminOrdersPage from './pages/AdminOrdersPage';
+
+function App() {
+    return (
+        <Router>
+            <AuthProvider>
+                <CartProvider>
+                    <ScrollToTop />
+                    <Routes>
+                        {/* Rutas del panel de administrador (sin el header/carrito de la tienda) */}
+                        <Route path="/admin/login" element={<AdminLoginPage />} />
+                        <Route path="/admin" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
+                        <Route path="/admin/orders" element={<ProtectedRoute><AdminOrdersPage /></ProtectedRoute>} />
+
+                        {/* Rutas de la tienda pública */}
+                        <Route path="*" element={
+                            <Layout>
+                                <Routes>
+                                    <Route path="/" element={<HomePage />} />
+                                    <Route path="/productos" element={<CatalogPage />} />
+                                    <Route path="/marcas" element={<CatalogPage title="Marcas" kicker="Marcas establecidas" description="MuscleMeds, Optimum Nutrition y más marcas originales disponibles en nuestro catálogo." />} />
+                                    <Route path="/combos" element={<CatalogPage title="Combos" kicker="Packs de ahorro" description="Combos de proteína, creatina y aminoácidos con precio especial." />} />
+                                    <Route path="/ofertas" element={<CatalogPage title="Ofertas" kicker="Promociones" description="Descuentos vigentes en suplementos deportivos seleccionados." />} />
+                                    <Route path="/blog" element={<CatalogPage title="Blog" kicker="Guías de nutrición" description="Consejos de suplementación y los productos que recomendamos para cada objetivo." />} />
+                                    <Route path="/product/:id" element={<div className="mx-auto max-w-[90rem] px-4 py-16 sm:px-8"><ProductDetailPage /></div>} />
+                                    <Route path="/checkout" element={<CheckoutPage />} />
+                                    <Route path="/success" element={<OrderSuccessPage />} />
+                                </Routes>
+                            </Layout>
+                        } />
+                    </Routes>
+                    <Toaster />
+                </CartProvider>
+            </AuthProvider>
+        </Router>
+    );
+}
+
+export default App;

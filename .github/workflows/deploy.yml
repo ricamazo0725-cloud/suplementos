@@ -1,0 +1,50 @@
+name: Desplegar a Hostinger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Instalar pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --no-frozen-lockfile
+
+      # Crea el .env con las llaves de Supabase de PRODUCCIÓN justo antes de
+      # compilar (Vite las "hornea" dentro del código en este paso). Estos
+      # valores vienen de GitHub → Settings → Secrets, nunca del repositorio.
+      - name: Crear archivo .env de producción
+        run: |
+          echo "VITE_SUPABASE_URL=${{ secrets.VITE_SUPABASE_URL }}" >> apps/web/.env
+          echo "VITE_SUPABASE_ANON_KEY=${{ secrets.VITE_SUPABASE_ANON_KEY }}" >> apps/web/.env
+
+      - name: Compilar el proyecto
+        run: pnpm build
+
+      - name: Subir por FTP a Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/apps/web/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # No borres archivos que no vengan del build (ej. si tienes un
+          # correo/webmail o subcarpetas alojadas aparte en el mismo hosting).
+          dangerous-clean-slate: false
