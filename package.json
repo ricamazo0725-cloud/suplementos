@@ -9,5 +9,10 @@
 		"build": "pnpm --filter ./apps/web build",
 		"start": "pnpm --filter ./apps/web start",
 		"lint": "pnpm --filter ./apps/web lint"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
 	}
 }
