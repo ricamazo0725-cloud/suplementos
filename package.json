@@ -6,7 +6,7 @@
 	"scripts": {
 		"setup": "pnpm install",
 		"dev": "pnpm --filter ./apps/web dev",
-		"build": "npm --prefix apps/web run build",
+		"build": "find node_modules -type f -path '*/bin/esbuild' -exec chmod +x {} \\; ; npm --prefix apps/web run build",
 		"start": "npm --prefix apps/web run start",
 		"lint": "pnpm --filter ./apps/web lint"
 	}
