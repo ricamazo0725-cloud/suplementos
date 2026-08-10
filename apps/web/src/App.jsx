@@ -14,6 +14,9 @@ import OrderSuccessPage from './pages/OrderSuccessPage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import AdminOrdersPage from './pages/AdminOrdersPage';
+import AdminBlogPage from './pages/AdminBlogPage';
+import BlogPage from './pages/BlogPage';
+import BlogPostPage from './pages/BlogPostPage';
 
 function App() {
     return (
@@ -26,6 +29,7 @@ function App() {
                         <Route path="/admin/login" element={<AdminLoginPage />} />
                         <Route path="/admin" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
                         <Route path="/admin/orders" element={<ProtectedRoute><AdminOrdersPage /></ProtectedRoute>} />
+                        <Route path="/admin/blog" element={<ProtectedRoute><AdminBlogPage /></ProtectedRoute>} />
 
                         {/* Rutas de la tienda pública */}
                         <Route path="*" element={
@@ -36,7 +40,8 @@ function App() {
                                     <Route path="/marcas" element={<CatalogPage title="Marcas" kicker="Marcas establecidas" description="MuscleMeds, Optimum Nutrition y más marcas originales disponibles en nuestro catálogo." />} />
                                     <Route path="/combos" element={<CatalogPage title="Combos" kicker="Packs de ahorro" description="Combos de proteína, creatina y aminoácidos con precio especial." />} />
                                     <Route path="/ofertas" element={<CatalogPage title="Ofertas" kicker="Promociones" description="Descuentos vigentes en suplementos deportivos seleccionados." />} />
-                                    <Route path="/blog" element={<CatalogPage title="Blog" kicker="Guías de nutrición" description="Consejos de suplementación y los productos que recomendamos para cada objetivo." />} />
+                                    <Route path="/blog" element={<BlogPage />} />
+                                    <Route path="/blog/:slug" element={<BlogPostPage />} />
                                     <Route path="/product/:id" element={<div className="mx-auto max-w-[90rem] px-4 py-16 sm:px-8"><ProductDetailPage /></div>} />
                                     <Route path="/checkout" element={<CheckoutPage />} />
                                     <Route path="/success" element={<OrderSuccessPage />} />

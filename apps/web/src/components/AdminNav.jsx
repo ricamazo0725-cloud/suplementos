@@ -10,6 +10,7 @@ const AdminNav = () => (
   <nav className="mb-8 flex gap-2 border-b border-border pb-4">
     <NavLink to="/admin" end className={tabClass}>Productos</NavLink>
     <NavLink to="/admin/orders" className={tabClass}>Pedidos</NavLink>
+    <NavLink to="/admin/blog" className={tabClass}>Blog</NavLink>
   </nav>
 );
 

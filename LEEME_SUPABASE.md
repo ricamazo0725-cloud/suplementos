@@ -104,3 +104,20 @@ Ya no necesitas entrar a Supabase para ver los pedidos: en `/admin` verás dos
 pestañas — **Productos** y **Pedidos**. En Pedidos puedes ver los datos del
 cliente, los productos comprados, y cambiar el estado (pendiente → confirmado
 → enviado → cancelado) con un clic.
+
+## 12. Blog
+Se agregó un blog completo:
+- **Público**: `/blog` (listado) y `/blog/tu-slug` (detalle de cada artículo).
+- **Admin**: pestaña "Blog" dentro de `/admin`, para crear, editar y eliminar
+  artículos, con subida de imagen de portada y control de "Publicado / Borrador".
+
+**Antes de usarlo**, corre el script SQL nuevo:
+1. Dashboard de Supabase → SQL Editor → New query.
+2. Pega el contenido de `apps/web/supabase/schema_blog.sql` y dale Run.
+   (Necesita que ya hayas corrido `schema.sql` antes — reutiliza una función
+   de ahí.)
+
+El campo "URL (slug)" se genera solo desde el título, pero lo puedes editar a
+mano antes de guardar. El contenido del artículo es texto simple (respeta
+saltos de línea), no tiene formato enriquecido (negritas, títulos, etc.) —
+si más adelante quieres eso, se puede agregar un editor con Markdown.

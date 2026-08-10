@@ -1632,3 +1632,291 @@
 ## 2026-08-09 01:08:09.079Z load
 - url: http://localhost:3000/
 
+## 2026-08-09 02:48:52.267Z load
+- url: http://localhost:3000/
+
+## 2026-08-09 02:48:56.938Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-09 02:49:06.974Z load
+- url: http://localhost:3000/admin
+
+## 2026-08-09 02:49:07.372Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-09 02:49:07.626Z navigate
+- url: http://localhost:3000/admin/login
+- via: replaceState
+
+## 2026-08-09 02:49:28.655Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":"email","placeholder":null,"label":"Correo","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:49:28.770Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":"email","placeholder":null,"label":"Correo","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:49:30.153Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":"email","placeholder":null,"label":"Correo","value":"ricamazo0725@gmail.com","valueLength":22,"text":""}
+
+## 2026-08-09 02:49:30.618Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":"email","placeholder":null,"label":"Correo","value":"ricamazo0725@gmail.com","valueLength":22,"text":""}
+
+## 2026-08-09 02:49:30.619Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=0]","valueLength":0,"text":""}
+
+## 2026-08-09 02:49:30.716Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=0]","valueLength":0,"text":""}
+
+## 2026-08-09 02:49:31.204Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=0]","valueLength":0,"text":""}
+
+## 2026-08-09 02:49:36.941Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=13]","valueLength":13,"text":""}
+
+## 2026-08-09 02:49:36.942Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=13]","valueLength":13,"text":""}
+
+## 2026-08-09 02:49:37.043Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Iniciar sesión"}
+
+## 2026-08-09 02:49:37.090Z submit
+- action: http://localhost:3000/admin/login
+- fields: [{"label":"Correo","type":"email","value":"ricamazo0725@gmail.com","length":22,"redacted":false},{"label":"Contraseña","type":"password","value":"[redacted:length=13]","length":13,"redacted":true},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-09 02:49:37.615Z network.error
+- method: POST
+- url: https://lejipsqguyjzryotljdu.supabase.co/auth/v1/token?grant_type=password
+- status: 400
+- requestBody: {"email":"ricamazo0725@gmail.com","password":"[redacted:length=13]","gotrue_meta_security":{}}
+- response: {"code":"invalid_credentials","message":"Invalid login credentials"}
+- durationMs: 521
+
+## 2026-08-09 02:49:37.616Z console.error
+- text: Fetch error from https://lejipsqguyjzryotljdu.supabase.co/auth/v1/token?grant_type=password: {"code":"invalid_credentials","message":"Invalid login credentials"}
+
+## 2026-08-09 02:49:38.883Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=13]","valueLength":13,"text":""}
+
+## 2026-08-09 02:49:38.954Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=13]","valueLength":13,"text":""}
+
+## 2026-08-09 02:49:39.202Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=13]","valueLength":13,"text":""}
+
+## 2026-08-09 02:49:46.623Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=14]","valueLength":14,"text":""}
+
+## 2026-08-09 02:49:46.623Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=14]","valueLength":14,"text":""}
+
+## 2026-08-09 02:49:46.715Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Iniciar sesión"}
+
+## 2026-08-09 02:49:46.717Z submit
+- action: http://localhost:3000/admin/login
+- fields: [{"label":"Correo","type":"email","value":"ricamazo0725@gmail.com","length":22,"redacted":false},{"label":"Contraseña","type":"password","value":"[redacted:length=14]","length":14,"redacted":true},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-09 02:49:47.028Z network.error
+- method: POST
+- url: https://lejipsqguyjzryotljdu.supabase.co/auth/v1/token?grant_type=password
+- status: 400
+- requestBody: {"email":"ricamazo0725@gmail.com","password":"[redacted:length=14]","gotrue_meta_security":{}}
+- response: {"code":"invalid_credentials","message":"Invalid login credentials"}
+- durationMs: 311
+
+## 2026-08-09 02:49:47.028Z console.error
+- text: Fetch error from https://lejipsqguyjzryotljdu.supabase.co/auth/v1/token?grant_type=password: {"code":"invalid_credentials","message":"Invalid login credentials"}
+
+## 2026-08-09 02:49:48.027Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Iniciar sesión"}
+
+## 2026-08-09 02:49:48.029Z submit
+- action: http://localhost:3000/admin/login
+- fields: [{"label":"Correo","type":"email","value":"ricamazo0725@gmail.com","length":22,"redacted":false},{"label":"Contraseña","type":"password","value":"[redacted:length=14]","length":14,"redacted":true},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-09 02:49:48.649Z network.error
+- method: POST
+- url: https://lejipsqguyjzryotljdu.supabase.co/auth/v1/token?grant_type=password
+- status: 400
+- requestBody: {"email":"ricamazo0725@gmail.com","password":"[redacted:length=14]","gotrue_meta_security":{}}
+- response: {"code":"invalid_credentials","message":"Invalid login credentials"}
+- durationMs: 620
+
+## 2026-08-09 02:49:48.649Z console.error
+- text: Fetch error from https://lejipsqguyjzryotljdu.supabase.co/auth/v1/token?grant_type=password: {"code":"invalid_credentials","message":"Invalid login credentials"}
+
+## 2026-08-09 02:49:49.205Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=14]","valueLength":14,"text":""}
+
+## 2026-08-09 02:49:49.284Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=14]","valueLength":14,"text":""}
+
+## 2026-08-09 02:49:49.523Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=14]","valueLength":14,"text":""}
+
+## 2026-08-09 02:49:49.767Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=14]","valueLength":14,"text":""}
+
+## 2026-08-09 02:49:53.638Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=14]","valueLength":14,"text":""}
+
+## 2026-08-09 02:50:01.700Z load
+- url: http://localhost:3000/admin
+
+## 2026-08-09 02:50:02.041Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-09 02:50:09.812Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=14]","valueLength":14,"text":""}
+
+## 2026-08-09 02:50:09.864Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=14]","valueLength":14,"text":""}
+
+## 2026-08-09 02:50:25.192Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":" Nuevo producto"}
+
+## 2026-08-09 02:50:26.318Z click
+- element: {"tag":"form","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Nombre *Subtítulo / MarcaCategoríaDescripciónPrecio (COP) *Precio en oferta (opcional)Stock disponible *Etiqueta (ej. \"Nuevo\", \"Oferta\")Imágenes del productoSubir imagenJPG, PNG o WEBPO pega URLs de imágenes manualmenteVisible en la tiendaCrear productoCancelar"}
+
+## 2026-08-09 02:50:26.513Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"title","placeholder":null,"label":"Nombre *","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:26.623Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"title","placeholder":null,"label":"Nombre *","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:27.712Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"title","placeholder":null,"label":"Nombre *","value":"sdds","valueLength":4,"text":""}
+
+## 2026-08-09 02:50:27.712Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"title","placeholder":null,"label":"Nombre *","value":"sdds","valueLength":4,"text":""}
+
+## 2026-08-09 02:50:27.712Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"subtitle","placeholder":null,"label":"Subtítulo / Marca","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:27.807Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"subtitle","placeholder":null,"label":"Subtítulo / Marca","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:31.123Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"subtitle","placeholder":null,"label":"Subtítulo / Marca","value":"dsds","valueLength":4,"text":""}
+
+## 2026-08-09 02:50:31.124Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"subtitle","placeholder":null,"label":"Subtítulo / Marca","value":"dsds","valueLength":4,"text":""}
+
+## 2026-08-09 02:50:31.125Z focus
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"description","placeholder":null,"label":"Descripción","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:31.187Z click
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"description","placeholder":null,"label":"Descripción","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:32.542Z change
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"description","placeholder":null,"label":"Descripción","value":"dsffsd","valueLength":6,"text":"dsffsd"}
+
+## 2026-08-09 02:50:32.542Z blur
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"description","placeholder":null,"label":"Descripción","value":"dsffsd","valueLength":6,"text":"dsffsd"}
+
+## 2026-08-09 02:50:32.615Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Crear producto"}
+
+## 2026-08-09 02:50:32.617Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:33.915Z click
+- element: {"tag":"form","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Nombre *Subtítulo / MarcaCategoríaDescripcióndsffsdPrecio (COP) *Precio en oferta (opcional)Stock disponible *Etiqueta (ej. \"Nuevo\", \"Oferta\")Imágenes del productoSubir imagenJPG, PNG o WEBPO pega URLs de imágenes manualmenteVisible en la tiendaCrear productoCancelar"}
+
+## 2026-08-09 02:50:34.502Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:34.573Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:35.863Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"0","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:35.864Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"0","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:36.531Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"1","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:36.531Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"1","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:36.943Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"1","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:37.815Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"2","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:37.816Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"2","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:38.071Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"3","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:38.072Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"3","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:38.591Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"3","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:38.849Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"3","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:39.103Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"3","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:42.616Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"4","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:42.616Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"price","placeholder":null,"label":"Precio (COP) *","value":"4","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:42.711Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Crear producto"}
+
+## 2026-08-09 02:50:42.713Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"stock","placeholder":null,"label":"Stock disponible *","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:44.177Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"stock","placeholder":null,"label":"Stock disponible *","value":"","valueLength":0,"text":""}
+
+## 2026-08-09 02:50:46.226Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"stock","placeholder":null,"label":"Stock disponible *","value":"1","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:46.227Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"stock","placeholder":null,"label":"Stock disponible *","value":"1","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:46.449Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"stock","placeholder":null,"label":"Stock disponible *","value":"2","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:46.450Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"stock","placeholder":null,"label":"Stock disponible *","value":"2","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:47.364Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"number","id":"stock","placeholder":null,"label":"Stock disponible *","value":"2","valueLength":1,"text":""}
+
+## 2026-08-09 02:50:47.465Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Crear producto"}
+
+## 2026-08-09 02:50:47.468Z submit
+- action: http://localhost:3000/admin
+- fields: [{"label":"Nombre *","type":"text","value":"sdds","length":4,"redacted":false},{"label":"Subtítulo / Marca","type":"text","value":"dsds","length":4,"redacted":false},{"label":"Categoría","type":"text","value":"","length":0,"redacted":false},{"label":"Descripción","type":"textarea","value":"dsffsd","length":6,"redacted":false},{"label":"Precio (COP) *","type":"number","value":"4","length":1,"redacted":false},{"label":"Precio en oferta (opcional)","type":"number","value":"","length":0,"redacted":false},{"label":"Stock disponible *","type":"number","value":"2","length":1,"redacted":false},{"label":"Etiqueta (ej. \"Nuevo\", \"Oferta\")","type":"text","value":"","length":0,"redacted":false},{"label":"[file]","type":"file","value":"","length":0,"redacted":false},{"label":"[button]","type":"button","value":"","length":0,"redacted":false},{"label":"https://ejemplo.com/imagen1.jpg https://ejemplo.com/imagen2.jpg","type":"textarea","value":"","length":0,"redacted":false},{"label":"Visible en la tienda","type":"button","value":"on","length":2,"redacted":false},{"label":"[checkbox]","type":"checkbox","value":"on","length":2,"redacted":false},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false},{"label":"[button]","type":"button","value":"","length":0,"redacted":false}]
+
+## 2026-08-09 02:51:40.378Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"ProductosPedidosADMINProductosSesión: ricamazo0725@gmail.com Nuevo producto SalirProductoCategoríaPrecioStockEstadoAccionessddsdsds—$ 42Visibletestdddcreatina$ 1001VisibleProteína Whey Gold Standard 2LBOptimum NutritionProteínas$ 185.00015Visible"}
+
+## 2026-08-09 02:51:41.019Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Pedidos"}
+
+## 2026-08-09 02:51:41.022Z navigate
+- url: http://localhost:3000/admin/orders
+- via: pushState
+
+## 2026-08-09 02:51:43.307Z click
+- element: {"tag":"div","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"ProductosPedidosADMINPedidosSesión: ricamazo0725@gmail.comTodos los estados Salirfdds#cfb0c3b2 · 8/08/2026, 9:51 p. m.$ 185.000pendienteKkd#d302a60e · 8/08/2026, 8:02 p. m.$ 100pendienterica#be07a45a · 8/08/2026, 3:16 p. m.$ 185.100enviadoricardo#9705168d · 8/08/2026, 3:15 p. m.$ 315.000pendientericardo#828379c0 · 6/08/2026, 4:26 p. m.$ 100confirmadodsffds#5712ab19 · 6/08/2026, 3:38 p. m.$ 100pendiente"}
+
+## 2026-08-09 02:51:44.179Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"fdds#cfb0c3b2 · 8/08/2026, 9:51 p. m.$ 185.000pendiente"}
+
