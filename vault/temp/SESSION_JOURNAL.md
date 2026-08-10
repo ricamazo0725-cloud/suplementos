@@ -1920,3 +1920,267 @@
 ## 2026-08-09 02:51:44.179Z click
 - element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"fdds#cfb0c3b2 · 8/08/2026, 9:51 p. m.$ 185.000pendiente"}
 
+## 2026-08-10 03:19:48.272Z load
+- url: http://localhost:3000/
+
+## 2026-08-10 03:19:51.686Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-10 03:19:57.955Z click
+- element: {"tag":"nav","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"InicioProductosMarcasCombosOfertasBlog"}
+
+## 2026-08-10 03:19:58.593Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Blog"}
+
+## 2026-08-10 03:19:58.597Z navigate
+- url: http://localhost:3000/blog
+- via: pushState
+
+## 2026-08-10 03:20:14.700Z load
+- url: http://localhost:3000/admin/blog
+
+## 2026-08-10 03:20:15.259Z navigate
+- url: http://localhost:3000/admin/blog
+- via: replaceState
+
+## 2026-08-10 03:20:15.307Z navigate
+- url: http://localhost:3000/admin/login
+- via: replaceState
+
+## 2026-08-10 03:20:17.264Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":"email","placeholder":null,"label":"Correo","value":"","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:17.366Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":"email","placeholder":null,"label":"Correo","value":"","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:18.232Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":"email","placeholder":null,"label":"Correo","value":"ricamazo0725@gmail.com","valueLength":22,"text":""}
+
+## 2026-08-10 03:20:18.729Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"email","id":"email","placeholder":null,"label":"Correo","value":"ricamazo0725@gmail.com","valueLength":22,"text":""}
+
+## 2026-08-10 03:20:18.730Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=0]","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:18.826Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=0]","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:19.284Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=0]","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:23.615Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=12]","valueLength":12,"text":""}
+
+## 2026-08-10 03:20:23.615Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=12]","valueLength":12,"text":""}
+
+## 2026-08-10 03:20:23.702Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Iniciar sesión"}
+
+## 2026-08-10 03:20:23.704Z submit
+- action: http://localhost:3000/admin/login
+- fields: [{"label":"Correo","type":"email","value":"ricamazo0725@gmail.com","length":22,"redacted":false},{"label":"Contraseña","type":"password","value":"[redacted:length=12]","length":12,"redacted":true},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-10 03:20:24.185Z network.error
+- method: POST
+- url: https://lejipsqguyjzryotljdu.supabase.co/auth/v1/token?grant_type=password
+- status: 400
+- requestBody: {"email":"ricamazo0725@gmail.com","password":"[redacted:length=12]","gotrue_meta_security":{}}
+- response: {"code":"invalid_credentials","message":"Invalid login credentials"}
+- durationMs: 478
+
+## 2026-08-10 03:20:24.185Z console.error
+- text: Fetch error from https://lejipsqguyjzryotljdu.supabase.co/auth/v1/token?grant_type=password: {"code":"invalid_credentials","message":"Invalid login credentials"}
+
+## 2026-08-10 03:20:25.942Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=12]","valueLength":12,"text":""}
+
+## 2026-08-10 03:20:26.028Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=12]","valueLength":12,"text":""}
+
+## 2026-08-10 03:20:26.276Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=12]","valueLength":12,"text":""}
+
+## 2026-08-10 03:20:26.731Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=12]","valueLength":12,"text":""}
+
+## 2026-08-10 03:20:27.124Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=12]","valueLength":12,"text":""}
+
+## 2026-08-10 03:20:27.596Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=12]","valueLength":12,"text":""}
+
+## 2026-08-10 03:20:29.749Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=13]","valueLength":13,"text":""}
+
+## 2026-08-10 03:20:29.749Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"password","id":"password","placeholder":null,"label":"Contraseña","value":"[redacted:length=13]","valueLength":13,"text":""}
+
+## 2026-08-10 03:20:29.854Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Iniciar sesión"}
+
+## 2026-08-10 03:20:29.856Z submit
+- action: http://localhost:3000/admin/login
+- fields: [{"label":"Correo","type":"email","value":"ricamazo0725@gmail.com","length":22,"redacted":false},{"label":"Contraseña","type":"password","value":"[redacted:length=13]","length":13,"redacted":true},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false}]
+
+## 2026-08-10 03:20:30.236Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-10 03:20:30.252Z navigate
+- url: http://localhost:3000/admin
+- via: replaceState
+
+## 2026-08-10 03:20:34.196Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Blog"}
+
+## 2026-08-10 03:20:34.197Z navigate
+- url: http://localhost:3000/admin/blog
+- via: pushState
+
+## 2026-08-10 03:20:35.861Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":" Nuevo artículo"}
+
+## 2026-08-10 03:20:36.808Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"title","placeholder":null,"label":"Título *","value":"","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:36.911Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"title","placeholder":null,"label":"Título *","value":"","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:38.728Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"title","placeholder":null,"label":"Título *","value":"sdsd","valueLength":4,"text":""}
+
+## 2026-08-10 03:20:38.728Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"title","placeholder":null,"label":"Título *","value":"sdsd","valueLength":4,"text":""}
+
+## 2026-08-10 03:20:38.729Z focus
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"slug","placeholder":"se-genera-solo-desde-el-titulo","label":"URL (slug)","value":"sdsd","valueLength":4,"text":""}
+
+## 2026-08-10 03:20:38.837Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"slug","placeholder":"se-genera-solo-desde-el-titulo","label":"URL (slug)","value":"sdsd","valueLength":4,"text":""}
+
+## 2026-08-10 03:20:40.021Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"slug","placeholder":"se-genera-solo-desde-el-titulo","label":"URL (slug)","value":"sdsddssd","valueLength":8,"text":""}
+
+## 2026-08-10 03:20:41.070Z change
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"slug","placeholder":"se-genera-solo-desde-el-titulo","label":"URL (slug)","value":"sdsddssd","valueLength":8,"text":""}
+
+## 2026-08-10 03:20:41.070Z blur
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":null,"id":"slug","placeholder":"se-genera-solo-desde-el-titulo","label":"URL (slug)","value":"sdsddssd","valueLength":8,"text":""}
+
+## 2026-08-10 03:20:41.071Z focus
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"excerpt","placeholder":"Aparece en la lista del blog y en buscadores.","label":"Resumen corto","value":"","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:41.166Z click
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"excerpt","placeholder":"Aparece en la lista del blog y en buscadores.","label":"Resumen corto","value":"","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:42.278Z change
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"excerpt","placeholder":"Aparece en la lista del blog y en buscadores.","label":"Resumen corto","value":"dsdsd","valueLength":5,"text":"dsdsd"}
+
+## 2026-08-10 03:20:42.278Z blur
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"excerpt","placeholder":"Aparece en la lista del blog y en buscadores.","label":"Resumen corto","value":"dsdsd","valueLength":5,"text":"dsdsd"}
+
+## 2026-08-10 03:20:42.279Z focus
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"content","placeholder":"Escribe el artículo. Los saltos de línea se respetan tal cual.","label":"Contenido","value":"","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:42.364Z click
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"content","placeholder":"Escribe el artículo. Los saltos de línea se respetan tal cual.","label":"Contenido","value":"","valueLength":0,"text":""}
+
+## 2026-08-10 03:20:44.863Z change
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"content","placeholder":"Escribe el artículo. Los saltos de línea se respetan tal cual.","label":"Contenido","value":"dsfdsdsfsdf","valueLength":11,"text":"dsfdsdsfsdf"}
+
+## 2026-08-10 03:20:44.864Z blur
+- element: {"tag":"textarea","role":null,"ariaLabel":null,"name":null,"type":null,"id":"content","placeholder":"Escribe el artículo. Los saltos de línea se respetan tal cual.","label":"Contenido","value":"dsfdsdsfsdf","valueLength":11,"text":"dsfdsdsfsdf"}
+
+## 2026-08-10 03:20:44.959Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Subir imagen"}
+
+## 2026-08-10 03:20:44.959Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"file","id":null,"placeholder":null,"label":"[file]","value":"","valueLength":0,"text":""}
+
+## 2026-08-10 03:21:02.719Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Crear artículo"}
+
+## 2026-08-10 03:21:02.721Z submit
+- action: http://localhost:3000/admin/blog
+- fields: [{"label":"Título *","type":"text","value":"sdsd","length":4,"redacted":false},{"label":"URL (slug)","type":"text","value":"sdsddssd","length":8,"redacted":false},{"label":"Resumen corto","type":"textarea","value":"dsdsd","length":5,"redacted":false},{"label":"Contenido","type":"textarea","value":"dsfdsdsfsdf","length":11,"redacted":false},{"label":"[file]","type":"file","value":"C:\\fakepath\\image_fx_ (2).jpg","length":29,"redacted":false},{"label":"[button]","type":"button","value":"","length":0,"redacted":false},{"label":"Publicado (visible en /blog)","type":"button","value":"on","length":2,"redacted":false},{"label":"[checkbox]","type":"checkbox","value":"on","length":2,"redacted":false},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false},{"label":"[button]","type":"button","value":"","length":0,"redacted":false}]
+
+## 2026-08-10 03:21:55.708Z load
+- url: http://localhost:3000/
+
+## 2026-08-10 03:21:56.036Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-10 03:21:57.640Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Blog"}
+
+## 2026-08-10 03:21:57.641Z navigate
+- url: http://localhost:3000/blog
+- via: pushState
+
+## 2026-08-10 03:22:01.647Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"9 de agosto de 2026sdsddsdsdLeer más "}
+
+## 2026-08-10 03:22:01.648Z navigate
+- url: http://localhost:3000/blog/sdsddssd
+- via: pushState
+
+## 2026-08-10 03:22:04.348Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":" Volver al blog"}
+
+## 2026-08-10 03:22:04.349Z navigate
+- url: http://localhost:3000/blog
+- via: pushState
+
+## 2026-08-10 03:22:12.827Z load
+- url: http://localhost:3000/admin/blog
+
+## 2026-08-10 03:22:13.163Z navigate
+- url: http://localhost:3000/admin/blog
+- via: replaceState
+
+## 2026-08-10 03:22:16.456Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":""}
+
+## 2026-08-10 03:22:18.481Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"button","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Subir imagen"}
+
+## 2026-08-10 03:22:18.481Z click
+- element: {"tag":"input","role":null,"ariaLabel":null,"name":null,"type":"file","id":null,"placeholder":null,"label":"[file]","value":"","valueLength":0,"text":""}
+
+## 2026-08-10 03:22:28.675Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":"submit","id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Guardar cambios"}
+
+## 2026-08-10 03:22:28.678Z submit
+- action: http://localhost:3000/admin/blog
+- fields: [{"label":"Título *","type":"text","value":"sdsd","length":4,"redacted":false},{"label":"URL (slug)","type":"text","value":"sdsddssd","length":8,"redacted":false},{"label":"Resumen corto","type":"textarea","value":"dsdsd","length":5,"redacted":false},{"label":"Contenido","type":"textarea","value":"dsfdsdsfsdf","length":11,"redacted":false},{"label":"[button]","type":"button","value":"","length":0,"redacted":false},{"label":"[file]","type":"file","value":"","length":0,"redacted":false},{"label":"[button]","type":"button","value":"","length":0,"redacted":false},{"label":"Publicado (visible en /blog)","type":"button","value":"on","length":2,"redacted":false},{"label":"[checkbox]","type":"checkbox","value":"on","length":2,"redacted":false},{"label":"[submit]","type":"submit","value":"","length":0,"redacted":false},{"label":"[button]","type":"button","value":"","length":0,"redacted":false}]
+
+## 2026-08-10 03:22:35.400Z load
+- url: http://localhost:3000/
+
+## 2026-08-10 03:22:35.816Z navigate
+- url: http://localhost:3000/
+- via: replaceState
+
+## 2026-08-10 03:22:38.004Z click
+- element: {"tag":"a","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":"Blog"}
+
+## 2026-08-10 03:22:38.006Z navigate
+- url: http://localhost:3000/blog
+- via: pushState
+
+## 2026-08-10 03:25:39.469Z load
+- url: http://localhost:3000/blog
+
+## 2026-08-10 03:25:51.084Z load
+- url: http://localhost:3000/admin/blog
+
+## 2026-08-10 03:25:51.457Z navigate
+- url: http://localhost:3000/admin/blog
+- via: replaceState
+
+## 2026-08-10 03:25:55.796Z click
+- element: {"tag":"button","role":null,"ariaLabel":null,"name":null,"type":null,"id":null,"placeholder":null,"label":null,"value":null,"valueLength":0,"text":" Nuevo artículo"}
+
