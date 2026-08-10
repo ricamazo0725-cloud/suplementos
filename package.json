@@ -6,8 +6,8 @@
 	"scripts": {
 		"setup": "pnpm install",
 		"dev": "pnpm --filter ./apps/web dev",
-		"build": "pnpm --filter ./apps/web build",
-		"start": "pnpm --filter ./apps/web start",
+		"build": "npm --prefix apps/web run build",
+		"start": "npm --prefix apps/web run start",
 		"lint": "pnpm --filter ./apps/web lint"
 	}
 }
