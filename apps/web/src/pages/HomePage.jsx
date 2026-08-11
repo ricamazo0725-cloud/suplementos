@@ -15,7 +15,7 @@ const nutrition = [
 const HomePage = () => (
   <>
     <Helmet>
-      <title>IronFuel Suplementos | Proteínas, aminoácidos y creatina originales</title>
+      <title>GLJSUPLEMENTOS</title>
       <meta name="description" content="Tienda en línea de suplementos deportivos originales: proteína de res y suero, creatina, BCAA y pre-entrenos. Envío gratis desde $250.000 COP en Colombia." />
     </Helmet>
 
